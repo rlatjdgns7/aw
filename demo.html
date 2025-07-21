@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foodism - 식품 첨가물 분석 앱</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f8fafc;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .phone-container {
+            max-width: 375px;
+            margin: 20px auto;
+            background: white;
+            border-radius: 30px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            height: 667px;
+            overflow: hidden;
+        }
+
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .app-container {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            background: #f8fafc;
+        }
+
+        .logo-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .logo-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+
+        .title {
+            font-size: 36px;
+            font-weight: bold;
+            color: #2E8B57;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            color: #64748b;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        .login-container {
+            background: white;
+            padding: 32px 24px;
+            border-radius: 24px 24px 0 0;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+        }
+
+        .welcome-text {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1e293b;
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .social-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 24px;
+            border-radius: 12px;
+            margin-bottom: 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid #e2e8f0;
+            background: white;
+        }
+
+        .social-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .apple-button {
+            background: #000000;
+            color: white;
+            border: none;
+        }
+
+        .social-icon {
+            font-size: 20px;
+            margin-right: 12px;
+        }
+
+        .social-button-text {
+            font-size: 16px;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .apple-button .social-button-text {
+            color: white;
+        }
+
+        .benefits-container {
+            margin-top: 20px;
+            margin-bottom: 24px;
+        }
+
+        .benefits-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 16px;
+        }
+
+        .benefit-item {
+            font-size: 14px;
+            color: #64748b;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .privacy-text {
+            font-size: 12px;
+            color: #9ca3af;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        .demo-badge {
+            background: #2E8B57;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            margin: 20px auto;
+            text-align: center;
+            max-width: 300px;
+        }
+
+        .loading-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(46, 139, 87, 0.9);
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 18px;
+            border-radius: 30px;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(255,255,255,0.3);
+            border-top: 4px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .info-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .info-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2E8B57;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .info-section {
+            margin-bottom: 20px;
+        }
+
+        .info-section h3 {
+            color: #374151;
+            margin-bottom: 10px;
+        }
+
+        .info-section p {
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        .status-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .status-item {
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .status-working {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .status-pending {
+            background: #fef3c7;
+            color: #92400e;
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-badge">
+        📱 Foodism 앱 미리보기 - 웹 데모 버전
+    </div>
+
+    <div class="phone-container">
+        <div class="status-bar">
+            <span>9:41</span>
+            <span>📶 📶 📶 🔋</span>
+        </div>
+        
+        <div class="app-container">
+            <div class="logo-container">
+                <div class="logo-icon">🥗</div>
+                <div class="title">Foodism</div>
+                <div class="subtitle">건강한 식품 선택을 위한 첨가물 분석</div>
+            </div>
+
+            <div class="login-container">
+                <div class="welcome-text">간편 로그인으로 시작하세요</div>
+
+                <div class="social-button" onclick="showLoading('Google')">
+                    <div class="social-icon">🔍</div>
+                    <div class="social-button-text">Google로 계속하기</div>
+                </div>
+
+                <div class="social-button apple-button" onclick="showLoading('Apple')">
+                    <div class="social-icon">🍎</div>
+                    <div class="social-button-text">Apple로 계속하기</div>
+                </div>
+
+                <div class="benefits-container">
+                    <div class="benefits-title">Foodism으로 할 수 있는 일:</div>
+                    <div class="benefit-item">✅ 식품 라벨 스캔으로 첨가물 분석</div>
+                    <div class="benefit-item">✅ 건강 위험도 실시간 확인</div>
+                    <div class="benefit-item">✅ 안전한 대체 제품 추천</div>
+                    <div class="benefit-item">✅ 개인 맞춤 식품 안전 가이드</div>
+                </div>
+
+                <div class="privacy-text">
+                    로그인하면 개인정보처리방침과 서비스 이용약관에 동의하게 됩니다.
+                </div>
+            </div>
+        </div>
+
+        <div class="loading-overlay" id="loadingOverlay">
+            <div class="spinner"></div>
+            <div id="loadingText">로그인 중...</div>
+        </div>
+    </div>
+
+    <div class="info-container">
+        <h2 class="info-title">🚀 현재 미리보기 상태</h2>
+        
+        <div class="info-section">
+            <h3>✅ 구현 완료된 기능</h3>
+            <div class="status-list">
+                <span class="status-item status-working">UI/UX 디자인</span>
+                <span class="status-item status-working">소셜 로그인 버튼</span>
+                <span class="status-item status-working">반응형 레이아웃</span>
+                <span class="status-item status-working">네비게이션 구조</span>
+                <span class="status-item status-working">타입스크립트 설정</span>
+                <span class="status-item status-working">Firebase 연동 준비</span>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <h3>⚠️ 설정 필요한 기능</h3>
+            <div class="status-list">
+                <span class="status-item status-pending">Firebase 인증</span>
+                <span class="status-item status-pending">Google OAuth</span>
+                <span class="status-item status-pending">Apple Sign-In</span>
+                <span class="status-item status-pending">백엔드 연결</span>
+                <span class="status-item status-pending">데이터베이스 연동</span>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <h3>📱 실제 앱 실행 방법</h3>
+            <p>
+                <strong>Expo:</strong> <code>cd frontend && npm start</code><br>
+                <strong>React Native CLI:</strong> <code>cd frontend-rn && npx react-native run-android</code>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        function showLoading(provider) {
+            const overlay = document.getElementById('loadingOverlay');
+            const text = document.getElementById('loadingText');
+            
+            text.textContent = `${provider} 로그인 중...`;
+            overlay.style.display = 'flex';
+            
+            setTimeout(() => {
+                text.textContent = 'Firebase 설정이 필요합니다 📋';
+                setTimeout(() => {
+                    overlay.style.display = 'none';
+                }, 2000);
+            }, 2000);
+        }
+
+        // 모바일 터치 이벤트 추가
+        document.addEventListener('touchstart', function() {}, true);
+    </script>
+</body>
+</html>

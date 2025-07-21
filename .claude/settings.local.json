@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pkill:*)",
+      "Bash(true)",
+      "Bash(powershell.exe:*)",
+      "Bash(npm install:*)"
+    ],
+    "deny": []
+  }
+}

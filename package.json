@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "chokidar": "^4.0.3",
+    "@expo/cli": "^0.22.3"
+  }
+}
