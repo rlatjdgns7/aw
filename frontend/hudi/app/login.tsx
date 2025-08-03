@@ -34,9 +34,9 @@ export default function LoginScreen() {
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <View style={styles.header}>
           <Text style={styles.title}>소셜로그인</Text>
-          <TouchableOpacity onPress={() => router.push('/main')}>
+          
             <Text style={styles.subtitle}>개인정보가 없으면 해킹도 없어요</Text>
-          </TouchableOpacity>
+        
         </View>
 
         <View style={styles.socialLoginContainer}>
