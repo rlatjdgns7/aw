@@ -1,6 +1,16 @@
 {
-  "dependencies": {
-    "chokidar": "^4.0.3",
-    "@expo/cli": "^0.22.3"
+  "name": "foodism",
+  "version": "1.0.0",
+  "description": "Foodism - Food additive analysis app",
+  "private": true,
+  "workspaces": [
+    "frontend/hudi",
+    "backend/functions"
+  ],
+  "scripts": {
+    "start:frontend": "cd frontend/hudi && npm start",
+    "start:backend": "cd backend/functions && npm run serve",
+    "build:backend": "cd backend/functions && npm run build",
+    "deploy:backend": "cd backend/functions && npm run deploy"
   }
 }

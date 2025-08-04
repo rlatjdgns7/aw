@@ -7,8 +7,8 @@ import { Response } from 'express';
 import * as admin from 'firebase-admin';
 import { AuthenticatedRequest } from '../middleware/authMiddleware';
 
-// Firestore database instance
-const db = admin.firestore();
+// Firestore database instance - initialized when needed
+const getDb = () => admin.firestore();
 
 /**
  * Controller object containing methods for home page operations.
@@ -32,6 +32,7 @@ export const homeController = {
   async getHome(req: AuthenticatedRequest, res: Response): Promise<void> {
     try {
       // Fetch sample data from both collections in parallel
+      const db = getDb();
       const [additivesSnapshot, recipesSnapshot] = await Promise.all([
         db.collection('additives').limit(10).get(),
         db.collection('recipes').limit(10).get()
@@ -53,12 +54,18 @@ export const homeController = {
       const randomRecipe = recipes[Math.floor(Math.random() * recipes.length)];
 
       res.json({
-        randomAdditive,
-        randomRecipe
+        success: true,
+        data: {
+          randomAdditive,
+          randomRecipe
+        }
       });
     } catch (error) {
       console.error('Error fetching home data:', error);
-      res.status(500).json({ error: 'Internal server error' });
+      res.status(500).json({ 
+        success: false, 
+        error: 'Internal server error' 
+      });
     }
   }
 };

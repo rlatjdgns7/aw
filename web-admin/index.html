@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foodism 관리자 패널</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Foodism 관리자 패널</h1>
+        </header>
+
+        <!-- Tab Navigation -->
+        <div class="tab-container">
+            <button class="tab-button active" data-tab="additives">첨가물 관리</button>
+            <button class="tab-button" data-tab="recipes">레시피 관리</button>
+        </div>
+
+        <!-- Loading Indicator -->
+        <div id="loading" class="loading">데이터를 불러오는 중...</div>
+
+        <!-- Additives Tab -->
+        <div id="additives-tab" class="tab-content active">
+            <div class="tab-header">
+                <h2>첨가물 관리</h2>
+                <button id="add-additive-btn" class="add-button">+ 첨가물 추가</button>
+            </div>
+            <div id="additives-list" class="items-list"></div>
+        </div>
+
+        <!-- Recipes Tab -->
+        <div id="recipes-tab" class="tab-content">
+            <div class="tab-header">
+                <h2>레시피 관리</h2>
+                <button id="add-recipe-btn" class="add-button">+ 레시피 추가</button>
+            </div>
+            <div id="recipes-list" class="items-list"></div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">항목 추가</h3>
+                <button id="close-modal" class="close-button">&times;</button>
+            </div>
+            <form id="item-form" class="modal-body">
+                <!-- Additive Form -->
+                <div id="additive-form" class="form-section">
+                    <div class="form-group">
+                        <label for="name">이름 *</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>위험도 *</label>
+                        <div class="hazard-selector">
+                            <label class="hazard-option low">
+                                <input type="radio" name="hazard_level" value="low">
+                                <span class="hazard-text">낮음</span>
+                            </label>
+                            <label class="hazard-option medium">
+                                <input type="radio" name="hazard_level" value="medium" checked>
+                                <span class="hazard-text">보통</span>
+                            </label>
+                            <label class="hazard-option high">
+                                <input type="radio" name="hazard_level" value="high">
+                                <span class="hazard-text">높음</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="description_short">간단한 설명 *</label>
+                        <input type="text" id="description_short" name="description_short" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="description_full">상세 설명 *</label>
+                        <textarea id="description_full" name="description_full" rows="4" required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="aliases">별명 (쉼표로 구분)</label>
+                        <input type="text" id="aliases" name="aliases" placeholder="별명1, 별명2, 별명3">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="additive-image">이미지 업로드</label>
+                        <input type="file" id="additive-image" name="image" accept="image/*">
+                        <div class="image-preview" id="additive-image-preview"></div>
+                    </div>
+                </div>
+
+                <!-- Recipe Form -->
+                <div id="recipe-form" class="form-section" style="display: none;">
+                    <div class="form-group">
+                        <label for="title">제목 *</label>
+                        <input type="text" id="title" name="title" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="youtube_url">유튜브 URL *</label>
+                        <input type="url" id="youtube_url" name="youtube_url" required placeholder="https://youtube.com/watch?v=...">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="recipe-image">이미지 업로드</label>
+                        <input type="file" id="recipe-image" name="image" accept="image/*">
+                        <div class="image-preview" id="recipe-image-preview"></div>
+                    </div>
+                </div>
+            </form>
+            
+            <div class="modal-footer">
+                <button type="button" id="cancel-btn" class="button secondary">취소</button>
+                <button type="submit" id="save-btn" class="button primary" form="item-form">저장</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div id="notification" class="notification"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>

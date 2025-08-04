@@ -4,7 +4,17 @@
       "Bash(pkill:*)",
       "Bash(true)",
       "Bash(powershell.exe:*)",
-      "Bash(npm install:*)"
+      "Bash(npm install:*)",
+      "Bash(curl:*)",
+      "Bash(node:*)",
+      "Bash(GOOGLE_APPLICATION_CREDENTIALS=/mnt/c/Users/kim/Downloads/fudism/backend/functions/service-account-key.json node test-firestore-v2.js)",
+      "Bash(GOOGLE_APPLICATION_CREDENTIALS=/mnt/c/Users/kim/Downloads/fudism/backend/functions/service-account-key.json node init-seed.js)",
+      "Bash(npm run build:*)",
+      "Bash(python3:*)",
+      "Bash(npm run serve:*)",
+      "Bash(rm:*)",
+      "Bash(git rm:*)",
+      "Bash(find:*)"
     ],
     "deny": []
   }

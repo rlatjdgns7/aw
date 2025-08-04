@@ -10,6 +10,7 @@ An advanced MVP React Native application with Firebase backend for analyzing foo
 - **Risk Assessment**: Color-coded health risk levels (low, medium, high)
 - **Detailed Information**: Comprehensive additive details with safety recommendations
 - **Real-time Updates**: Live progress tracking for image processing jobs
+- **Web Admin Panel**: Browser-based content management system for easy data updates
 
 ## 🏗️ Architecture
 
@@ -113,6 +114,37 @@ An advanced MVP React Native application with Firebase backend for analyzing foo
    npm start
    ```
 
+### Web Admin Panel Setup
+
+1. **Navigate to Web Admin Directory**
+   ```bash
+   cd web-admin
+   ```
+
+2. **Install Dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Start Web Server**
+   ```bash
+   npm start
+   # or use the convenient script
+   ./start-admin.sh
+   ```
+
+4. **Access Admin Panel**
+   - Main URL: http://localhost:3000
+   - Admin Panel: http://localhost:3000/admin
+   - Health Check: http://localhost:3000/health
+
+**Features:**
+- ✅ Additive management (add, edit, delete)
+- ✅ Recipe management (add, edit, delete)
+- ✅ Responsive web design
+- ✅ Real-time data updates
+- ✅ Intuitive user interface
+
 ## 🔒 Security Features
 
 - **Firebase Authentication** with ID token verification
@@ -129,10 +161,21 @@ An advanced MVP React Native application with Firebase backend for analyzing foo
 
 ## 📋 API Endpoints
 
+### Public Endpoints
 - `GET /api/home` - Fetch random recipe and additive
 - `POST /api/search/text` - Search additives by text input
 - `POST /api/search/image` - Async image processing with job tracking
 - `GET /api/additive/:id` - Fetch detailed additive information
+
+### Admin Endpoints
+- `GET /api/admin/additives` - Get all additives
+- `POST /api/admin/additives` - Create new additive
+- `PUT /api/admin/additives/:id` - Update additive
+- `DELETE /api/admin/additives/:id` - Delete additive
+- `GET /api/admin/recipes` - Get all recipes
+- `POST /api/admin/recipes` - Create new recipe
+- `PUT /api/admin/recipes/:id` - Update recipe
+- `DELETE /api/admin/recipes/:id` - Delete recipe
 
 ## 🔄 Async Image Processing Flow
 

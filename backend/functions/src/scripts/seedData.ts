@@ -255,6 +255,15 @@ const additiveData = [
     aliases: ['변성전분', '개량전분']
   },
   {
+    id: 'starch',
+    name: '전분',
+    hazard_level: 'low',
+    description_short: '천연 농후제',
+    description_full:
+      '전분은 곡물이나 감자 등에서 추출한 천연 다당류로, 식품의 점도를 높이고 조직감을 개선하는 데 사용됩니다.',
+    aliases: ['전분', '녹말', '옥수수전분', '감자전분', '밀전분', '쌀전분']
+  },
+  {
     id: 'pectin',
     name: '펙틴',
     hazard_level: 'low',
@@ -289,8 +298,17 @@ const additiveData = [
     hazard_level: 'low',
     description_short: '천연 우마미 소재',
     description_full:
-      '효모추출물은 사멸시킨 효모를 분해해 얻은 아미노산·핵산 혼합물로, “천연 MSG 대체” 조미 소재로 활용됩니다.',
+      '효모추출물은 사멸시킨 효모를 분해해 얻은 아미노산·핵산 혼합물로, "천연 MSG 대체" 조미 소재로 활용됩니다.',
     aliases: ['효모추출물']
+  },
+  {
+    id: 'flavor-enhancer',
+    name: '향미증진제',
+    hazard_level: 'medium',
+    description_short: '감칠맛을 강화하는 첨가물',
+    description_full:
+      '향미증진제는 음식의 감칠맛을 강화하는 첨가물로, 주로 핵산계 화합물(IMP, GMP)이나 아미노산계 화합물이 사용됩니다.',
+    aliases: ['향미증진제', '풍미증진제', '맛증진제']
   },
 
   /* --- 인공색소 --- */
@@ -396,13 +414,31 @@ const additiveData = [
     aliases: ['스테비아']
   },
   {
-    id: 'monk-fruit',
+    id: 'monk-fruit',  
     name: '몽크후르트',
     hazard_level: 'low',
     description_short: '루오한궈 유래 천연 감미료',
     description_full:
       '몽크후르트 감미료는 미국 GRAS, EU 미승인 상태이며 단맛은 설탕의 최대 250배입니다.',
     aliases: ['몽크후르트', '루오한궈']
+  },
+  {
+    id: 'glucose',
+    name: '포도당',
+    hazard_level: 'low',
+    description_short: '단순당 감미료',
+    description_full:
+      '포도당(글루코스)은 자연 존재하는 단순당으로, 식품에 단맛을 부여하고 에너지원 역할을 합니다.',
+    aliases: ['포도당', '글루코스', 'glucose']
+  },
+  {
+    id: 'refined-sugar',
+    name: '정백당',
+    hazard_level: 'low',
+    description_short: '정제된 설탕',
+    description_full:
+      '정백당은 사탕수수나 사탕무에서 추출하여 정제한 설탕으로, 순수한 자당(sucrose)입니다.',
+    aliases: ['정백당', '백설탕', '설탕', '자당']
   },
 
   /* --- 산화방지제 --- */
@@ -452,6 +488,15 @@ const additiveData = [
     description_full:
       '말산은 사과·포도 등 과일에 자연 존재하며 새콤한 맛이 오래 지속되는 특성이 있습니다.',
     aliases: ['말산']
+  },
+  {
+    id: 'acidity-regulator',
+    name: '산도조절제',
+    hazard_level: 'low',
+    description_short: 'pH 조절 첨가물',
+    description_full:
+      '산도조절제는 식품의 pH를 적정 수준으로 유지하여 맛을 개선하고 보존성을 높이는 첨가물입니다.',
+    aliases: ['산도조절제', 'pH조절제', '산미료']
   },
 
   /* --- 팽창제 --- */
@@ -561,3 +606,6 @@ export async function seedDatabase() {
   
   console.log('시드 데이터 추가 완료!');
 }
+
+// Export additiveData for in-memory usage
+export { additiveData };

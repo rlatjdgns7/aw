@@ -7,8 +7,8 @@ import { Response } from 'express';
 import * as admin from 'firebase-admin';
 import { AuthenticatedRequest } from '../middleware/authMiddleware';
 
-// Firestore database instance
-const db = admin.firestore();
+// Firestore database instance - initialized when needed
+const getDb = () => admin.firestore();
 
 /**
  * Controller object containing methods for additive operations.
@@ -31,16 +31,23 @@ export const additiveController = {
 
       // Validate required parameters
       if (!id) {
-        res.status(400).json({ error: 'Additive ID is required' });
+        res.status(400).json({ 
+          success: false, 
+          error: 'Additive ID is required' 
+        });
         return;
       }
 
       // Fetch additive document from Firestore
+      const db = getDb();
       const additiveDoc = await db.collection('additives').doc(id).get();
 
       // Check if document exists
       if (!additiveDoc.exists) {
-        res.status(404).json({ error: 'Additive not found' });
+        res.status(404).json({ 
+          success: false, 
+          error: 'Additive not found' 
+        });
         return;
       }
 
@@ -50,10 +57,16 @@ export const additiveController = {
         ...additiveDoc.data()
       };
 
-      res.json({ additive });
+      res.json({ 
+        success: true, 
+        data: { additive } 
+      });
     } catch (error) {
       console.error('Error fetching additive:', error);
-      res.status(500).json({ error: 'Internal server error' });
+      res.status(500).json({ 
+        success: false, 
+        error: 'Internal server error' 
+      });
     }
   }
 };
